@@ -22,6 +22,7 @@ axios(url)
     results.push({
       title,
       price,
+      currency: "eur",
       listingUrl,
       imgUrl,
     });

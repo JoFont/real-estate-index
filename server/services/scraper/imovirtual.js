@@ -12,12 +12,21 @@ axios(url)
   let results = [];
 
   articles.each((i, el) => {
-    const imgUrl = $(this).find("figure > .quick-gallery > .quick-gallery_full > img");
-    const name = $(this).find("figure > .quick-gallery > .quick-gallery_full > img");
+    const title = $(el).find(".offer-item-title").text();
+    const listingUrl = $(el).attr("data-url");
+    const priceUgly = $(el).find(".offer-item-price").text();
+    const price = priceUgly.match(/[0-9]/g).join("");
+    const imgUrl = $(el).find(".img-cover").attr("data-src");
+    const data = $(el).attr();
 
-    console.log(name);
+    results.push({
+      title,
+      price,
+      listingUrl,
+      imgUrl,
+    });
   });
 
-  // console.log(results);
+  console.log(results);
 })
 .catch(console.error);  

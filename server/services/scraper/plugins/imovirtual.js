@@ -22,7 +22,7 @@ module.exports.imovirtual = axios(url)
     results.push({
       title,
       price,
-      currency: "eur",
+      currency: "EUR",
       listingUrl,
       imgUrl,
     });

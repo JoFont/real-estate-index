@@ -3,9 +3,11 @@ const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 
 const url = 'https://www.olx.pt/imoveis/?search%5Bdescription%5D=1';
-let page;
 
-puppeteer
+// FIXME: Browser not closing
+
+const getPages = new Promise((resolve, reject) => {
+  puppeteer
   .launch({ignoreDefaultArgs: ['--disable-extensions']})
   .then(browser => browser.newPage())
   .then(page => {
@@ -13,18 +15,23 @@ puppeteer
       return page.content();
     });
   }).then(html => {
+    let numberOfPages;
     const $ = cheerio.load(html);
-    const pages = $(".pager.rel.clr").find("a").each((i, el) => {
+    $(".pager.rel.clr").find("a").each((i, el) => {
       if($(el).data("cy") === "page-link-last") {
-        page = Number($(el).children().text());
+        numberOfPages = Number($(el).children().text());
+        browser.close().then(() => resolve(numberOfPages));
       }
     });
+  }).catch(console.error);
+});
 
-    console.log(page);
+getPages.then(nPages => {
+  console.log(nPages);
     // const pages = $("page-link-last")
-    const articles = $("#offers_table tr.wrap");
+    // const articles = $("#offers_table tr.wrap");
 
-    let results = [];
+    // let results = [];
 
     // articles.each((i, el) => {
     //   const features = $(el).data('features');
@@ -49,10 +56,10 @@ puppeteer
     //   }
     // });
   
-    console.log(results);
+    // console.log(results);
+});
 
 
-  }).catch(console.error);
 
 
 

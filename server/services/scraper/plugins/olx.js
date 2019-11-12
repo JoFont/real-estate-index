@@ -2,7 +2,7 @@ const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const chalk = require("chalk");
 
-const url = 'https://www.olx.pt/imoveis/?search%5Bdescription%5D=1';
+const url = 'https://www.olx.pt/imoveis/?search[description]=1';
 let results = [];
 
 async function getPages() {
@@ -36,6 +36,7 @@ async function getPageResults(pageNum) {
   const $ = cheerio.load(html);
   const articles = $("#offers_table tr.wrap");
 
+  // FIXME: This loop is not running
   articles.each((i, el) => {
     const features = $(el).data('features');
 
@@ -64,7 +65,9 @@ async function getPageResults(pageNum) {
   });
 
   browser.close();
+
   console.log(`${chalk.cyan('Fetching results for page:')} ${chalk.cyan.bold(pageNum)} => ${chalk.green('SUCCESS')} ---- ${chalk.yellow('Total Number of Results: ')} ${chalk.yellow.italic(results.length)}`);
+
   return;
 } 
 

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "olx": "nodemon services/scraper/plugins/olx.js",
+    "olx": "nodemon jobs/scraper/services/olx.js",
+    "imo": "nodemon jobs/scraper/services/imovirtual.js",
+    "scraper": "nodemon jobs/scraper/index.js"
   },
   "author": "Diogo Marques",
   "license": "ISC",

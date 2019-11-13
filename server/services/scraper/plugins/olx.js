@@ -75,7 +75,6 @@ getPages().then(async nPages => {
   for(let i = 1; i < nPages; i++) {
     await getPageResults(i);
   }
-
   console.log(results);
 });
 

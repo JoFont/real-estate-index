@@ -1,8 +1,12 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const url =
-	"https://www.imovirtual.com/arrendar/apartamento/?search%5Bfilter_float_m%3Ato%5D=50&search%5Bdescription%5D=1&search%5Bregion_id%5D=11&nrAdsPerPage=72";
+const url = "https://www.imovirtual.com/arrendar/?search%5Bdescription%5D=1&nrAdsPerPage=72";
+
+// TODO: 
+// todo: 1. Puppeteer para o numero de páginas
+// todo: 2. Puppeteer para resultados de  cada página
+// todo: 3. repetir tudo para arrendar e comprar
 
 // axios(url)
 // .then(response => {

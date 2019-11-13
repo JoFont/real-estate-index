@@ -28,7 +28,23 @@ async function getPages() {
 async function getPageResults(pageNum) {
   console.log(`${chalk.cyan('Fetching results for page:')} ${chalk.cyan.bold(pageNum)}`);
 
-  const browser = await puppeteer.launch({ignoreDefaultArgs: ['--disable-extensions']});
+  const args = [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-infobars',
+    '--window-position=0,0',
+    '--ignore-certifcate-errors',
+    '--ignore-certifcate-errors-spki-list',
+    '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
+  ];
+  const options = {
+    args,
+    headless: true,
+    ignoreHTTPSErrors: true,
+    userDataDir: './tmp'
+  };
+
+  const browser = await puppeteer.launch(options);
   const page = await browser.newPage();
   await page.goto(`${url}&page=${pageNum}`, {"waitUntil" : "networkidle0"});
   const html = await page.content();
@@ -36,19 +52,14 @@ async function getPageResults(pageNum) {
   const $ = cheerio.load(html);
   const articles = $("#offers_table tr.wrap");
 
-  // FIXME: This loop is not running
   articles.each((i, el) => {
     const features = $(el).data('features');
-
-    console.log(features);
 
     if(features && features["cat_l3_name"]) {
       const title = $(el).find(".title-cell > div > h3 > a > strong").text();
       const imgUrl = $(el).find("td > a.thumb > img").attr("src");
       const propertyType = features["cat_l3_name"] ? features["cat_l3_name"].split("-")[0].slice(0, -1) : null;
       const listingType = features["cat_l3_name"].split("-")[1] === "venda" ? "buy" : "rent";
-
-      console.log(title);
 
       results.push({
         title,
@@ -59,7 +70,7 @@ async function getPageResults(pageNum) {
         imgUrl,
         propertyType,
         listingType,
-        features
+        // features
       });
     }
   });

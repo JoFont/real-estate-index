@@ -1,24 +1,8 @@
 const services = require("./services/services");
 const mongoose = require("mongoose");
+const Property = require("../db/models/Property");
 
 // TODO: Temp collection and replace
-
-//Define a schema
-const Schema = new mongoose.Schema({
-	title: String,
-	price: Number,
-	currency: String,
-	city: String,
-	region: String,
-	// imgUrl: String,
-	imgUrl: [String, Object],
-	// propertyType: String,
-	listingType: String,
-	// listingUrl: String,
-	provider: String
-});
-
-const Model = mongoose.model('properties', Schema);
 
 //Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1/real-estate-index-test';
@@ -35,7 +19,7 @@ db.once("open", () => {
 
 const postServiceResults = arr => {
 	arr.forEach(data => {
-		let doc = new Model({
+		let doc = new Property({
 			title: data.title,
 			price: data.price,
 			currency: data.currency,

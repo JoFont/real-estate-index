@@ -3,7 +3,8 @@ const cheerio = require("cheerio");
 const chalk = require("chalk");
 const taskStd = require("./util/stdout-task-status"); 
 
-const url = "https://www.imovirtual.com/arrendar/?search%5Bdescription%5D=1&nrAdsPerPage=72";
+const urlVar = "arrendar";
+const url = `https://www.imovirtual.com/${urlVar}/?search%5Bdescription%5D=1&nrAdsPerPage=72`;
 
 
 async function getPages() {
@@ -83,7 +84,7 @@ async function getPageResults(pageNum) {
 		city,
 		region,
 		// propertyType,
-		// listingType,
+		listingType: urlVar === "arrendar" ? "rent" : "buy",
 		provider: "imovirtual",
         });
     });
@@ -92,7 +93,6 @@ async function getPageResults(pageNum) {
 
     taskStd.taskSuccess("Total Number of Results: ", results.length, `Page: ${pageNum}`);
     
-
 	return results;
 }
 
@@ -103,5 +103,17 @@ exports.fetch = sendResultsCallback =>
 			const results = await getPageResults(i);
 			await sendResultsCallback(results);
 		}
+
+		if(urlVar === "arrendar") {
+			urlVar = "comprar";
+			return getPages().then(async nPages => {
+				for (let i = 1; i < nPages; i++) {
+					const results = await getPageResults(i);
+					await sendResultsCallback(results);
+				}
+				return
+			});
+		}
+
 		return;
 	});

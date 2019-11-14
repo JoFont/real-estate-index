@@ -3,8 +3,8 @@ const cheerio = require("cheerio");
 const chalk = require("chalk");
 const taskStd = require("./util/stdout-task-status"); 
 
-const urlVar = "arrendar";
-const url = `https://www.imovirtual.com/${urlVar}/?search%5Bdescription%5D=1&nrAdsPerPage=72`;
+let urlVar = "arrendar";
+let url = `https://www.imovirtual.com/${urlVar}/?search%5Bdescription%5D=1&nrAdsPerPage=72`;
 
 
 async function getPages() {

@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const chalk = require("chalk");
-const taskStd = require("./util/logger"); 
+const taskStd = require("./util/stdout-task-status"); 
 
 const url = "https://www.imovirtual.com/arrendar/?search%5Bdescription%5D=1&nrAdsPerPage=72";
 

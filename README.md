@@ -1,6 +1,25 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
----
+
+```bash
+cd server
+npm i
+mpn i -g nodemon
+```
+
+
+
+```bash
+cd public
+npm i
+```
+
+
+
+
+
+
+
+
 
 # svelte app
 

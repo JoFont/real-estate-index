@@ -64,27 +64,18 @@ async function getPageResults(pageNum) {
     articles.each((i, el) => {
         const title = $(el).find(".offer-item-title").text();
         const listingUrl = $(el).attr("data-url");
-		
-		const priceUgly = $(el).find(".offer-item-price").text();
+        const priceUgly = $(el).find(".offer-item-price").text();
         let price = priceUgly.match(/[0-9]/g) === null ? null : Number(priceUgly.match(/[0-9]/g).join(""));
-		
-		const imgUrl = $(el).find(".img-cover").attr("data-src");
-		
-		const address = $(el).find("p.text-nowrap").text().split(":")[1];
-		const city = address.split(",")[1] ? address.split(",")[1].trim() : null;
-		const region = address.split(",")[0] ? address.split(",")[0].trim() : null;
+        const imgUrl = $(el).find(".img-cover").attr("data-src");
+        const data = $(el).attr();
 
         results.push({
         title,
         price,
         currency: "EUR",
         listingUrl,
-		imgUrl,
-		city,
-		region,
-		// propertyType,
-		// listingType,
-		provider: "imovirtual",
+        imgUrl,
+        provider: "imovirtual"
         });
     });
 

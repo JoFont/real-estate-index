@@ -52,8 +52,6 @@ async function getPageResults(pageNum) {
 
     taskStd.startTask("Fetching results for page:", pageNum);
 
-	
-
 	const browser = await puppeteer.launch(options);
 	const page = await browser.newPage();
 	await page.goto(`${url}&page=${pageNum}`, { waitUntil: "networkidle0" });

@@ -7,8 +7,8 @@ router.get("/properties", (req, res, next) => {
 });
 
 
-router.get("/uptime", (req, res, next) => {
-    
-});
+// router.get("/uptime", (req, res, next) => {
+
+// });
 
 module.exports = router;

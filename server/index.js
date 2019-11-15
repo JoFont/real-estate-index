@@ -20,7 +20,7 @@ const serverStatus = () => {
 server.use("/api", require("./routes/api"));
 
 // Uptime
-api.use('/api/uptime', require('express-healthcheck')({
+server.use('/api/uptime', require('express-healthcheck')({
     healthy: serverStatus   
 }));
 

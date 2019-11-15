@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,14 @@ const serverStatus = () => {
         dbState: mongoose.STATES[mongoose.connection.readyState] 
     }
 };
+
+
+
+app.use(express.static(__dirname, '../public/dist'));
+
+app.get('/', (_req, res) => {
+  res.sendFile(__dirname, '../public/dist/index.html');
+});
 
 // Api route handling
 server.use("/api", require("./routes/api"));

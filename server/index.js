@@ -1,5 +1,5 @@
 const express = require("express");
-const path = require('path');
+const path = require("path");
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
@@ -19,10 +19,10 @@ const serverStatus = () => {
 
 
 
-app.use(express.static(__dirname, '../public/dist'));
+server.use(express.static(path.join(__dirname, '../public/dist')));
 
-app.get('/', (_req, res) => {
-  res.sendFile(__dirname, '../public/dist/index.html');
+server.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/dist/index.html'));
 });
 
 // Api route handling

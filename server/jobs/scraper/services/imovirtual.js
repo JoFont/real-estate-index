@@ -6,12 +6,26 @@ const taskStd = require("./util/stdout-task-status");
 let urlVar = "arrendar";
 let url = `https://www.imovirtual.com/${urlVar}/?search%5Bdescription%5D=1&nrAdsPerPage=72`;
 
+const args = [
+	"--no-sandbox",
+	"--disable-setuid-sandbox",
+	"--disable-infobars",
+	"--window-position=0,0",
+	"--ignore-certifcate-errors",
+	"--ignore-certifcate-errors-spki-list",
+	'--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
+];
+const options = {
+	args,
+	headless: true,
+	ignoreHTTPSErrors: true,
+	userDataDir: "./tmp",
+};
+
 
 async function getPages() {
     taskStd.startTask("Fetching Number of Pages for Imovirtual");
-	const browser = await puppeteer.launch({
-		ignoreDefaultArgs: ["--disable-extensions"]
-	});
+	const browser = await puppeteer.launch(options);
 	const page = await browser.newPage();
 	await page.goto(url);
 	const html = await page.content();
@@ -38,21 +52,7 @@ async function getPageResults(pageNum) {
 
     taskStd.startTask("Fetching results for page:", pageNum);
 
-	const args = [
-		"--no-sandbox",
-		"--disable-setuid-sandbox",
-		"--disable-infobars",
-		"--window-position=0,0",
-		"--ignore-certifcate-errors",
-		"--ignore-certifcate-errors-spki-list",
-		'--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
-	];
-	const options = {
-		args,
-		headless: true,
-		ignoreHTTPSErrors: true,
-        userDataDir: "./tmp",
-	};
+	
 
 	const browser = await puppeteer.launch(options);
 	const page = await browser.newPage();

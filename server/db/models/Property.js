@@ -1,18 +1,24 @@
 const mongoose = require("mongoose");
 
-//Define a schema
-const Schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
 	title: String,
 	price: Number,
 	currency: String,
 	city: String,
 	region: String,
-	// imgUrl: String,
-	imgUrl: [String, Object],
+	imgUrl: {
+		type: String,
+		default: null
+	},
 	// propertyType: String,
 	listingType: String,
 	// listingUrl: String,
 	provider: String
+},
+{
+	timestamps: true
 });
 
-module.exports.Model = mongoose.model('properties', Schema);
+const Model = mongoose.model('properties', schema);
+
+module.exports = Model;

@@ -6,7 +6,9 @@
   "scripts": {
     "olx": "nodemon jobs/scraper/services/olx.js",
     "imo": "nodemon jobs/scraper/services/imovirtual.js",
-    "scraper": "nodemon jobs/scraper/index.js"
+    "scraper": "nodemon jobs/scraper/index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Diogo Marques",
   "license": "ISC",
@@ -14,9 +16,13 @@
     "axios": "^0.19.0",
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.10",
     "ora": "^4.0.3",
     "puppeteer": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   }
 }

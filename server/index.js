@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const scraper = require("./jobs/scraper/index");
 
 const PORT = process.env.PORT || 3000;
 const server = express();
@@ -17,15 +18,14 @@ const serverStatus = () => {
     }
 };
 
-
-
+//! Serve Svelte Front End
 server.use(express.static(path.join(__dirname, '../public/dist')));
 
 server.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/dist/index.html'));
 });
 
-// Api route handling
+//! Api route handling
 server.use("/api", require("./routes/api"));
 
 // Uptime
@@ -45,3 +45,8 @@ server.use((err, req, res, next) => {
 server.listen(PORT, () => {
     console.log(`Server listening on Port: ${PORT}`);
 });
+
+
+
+// Run Scraper
+scraper.scrape();

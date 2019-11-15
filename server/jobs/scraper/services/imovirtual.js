@@ -115,7 +115,7 @@ exports.fetch = sendResultsCallback =>
 					const results = await getPageResults(i);
 					await sendResultsCallback(results);
 				}
-				return
+				return true
 			});
 		}
 

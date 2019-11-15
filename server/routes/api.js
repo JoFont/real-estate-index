@@ -1,14 +1,13 @@
 const express = require("express");
+const Property = require("../db/models/Property");
 
 const router = express.Router();
 
 router.get("/properties", (req, res, next) => {
-    res.send({type: "GET", code: "200", status: "OK"});
+    Property.find({}).then(data => {
+        res.send(data);
+    });
 });
 
-
-// router.get("/uptime", (req, res, next) => {
-
-// });
 
 module.exports = router;

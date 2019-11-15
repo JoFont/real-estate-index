@@ -22,7 +22,6 @@ const options = {
 	userDataDir: "./tmp",
 };
 
-
 async function getPages() {
     taskStd.startTask("Fetching Number of Pages for Imovirtual");
 	const browser = await puppeteer.launch(options);

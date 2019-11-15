@@ -1,32 +1,6 @@
 const services = require("./services/services");
 const mongoose = require("mongoose");
-// const Property = require("../db/models/Property");
-
-// TODO: Temp collection and replace
-
-//Define a schema
-const schema = new mongoose.Schema({
-	title: String,
-	price: Number,
-	currency: String,
-	city: String,
-	region: String,
-	// imgUrl: String,
-	imgUrl: {
-		type: String,
-		default: null
-	},
-	// propertyType: String,
-	listingType: String,
-	// listingUrl: String,
-	provider: String
-},
-{
-	timestamps: true
-});
-
-const Property = mongoose.model('properties', schema);
-const TestModel = mongoose.model('tempProperties', schema);
+const Property = require("../../db/models/Property");
 
 
 //Set up default mongoose connection
@@ -38,21 +12,23 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 db.once("open", () => {
-	Promise.all([
-		services.imovirtual.fetch(postServiceResults)
-	]).then(res => {
-		// FIXME: Not sure this works
-		Property.find({}, (err, properties) => {
-			properties.forEach(async doc => {
-				await new TestModel(doc).save();
-			});
-		}).then(res => {
-			db.close();
-		});
-	});
-	
+	// Promise.all([
+	// 	services.imovirtual.fetch(postServiceResults)
+	// ]).then(res => {
+	// 	// FIXME: Not sure this works
+	// 	Properties.find({}, (err, properties) => {
+	// 		properties.forEach(async doc => {
+	// 			await new TestModel(doc).save();
+	// 		});
+	// 	}).then(res => {
+	// 		db.close();
+	// 	});
+	// });
+	services.imovirtual.fetch(postServiceResults);
 });
 
+
+// mongoose.connection.readyState
 
 const postServiceResults = arr => {
 	arr.forEach(data => {
@@ -63,9 +39,9 @@ const postServiceResults = arr => {
 			city: data.city,
 			region: data.region,
 			imgUrl: data.imgUrl,
-			// propertyType: String,
+			propertyType: data.propertyType,
 			listingType: data.listingType,
-			// listingUrl: String,
+			listingUrl: data.listingUrl,
 			provider: data.provider
 		});
 

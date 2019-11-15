@@ -71,21 +71,25 @@ async function getPageResults(pageNum) {
 		
 		const imgUrl = $(el).find(".img-cover").attr("data-src");
 		
-		const address = $(el).find("p.text-nowrap").text().split(":")[1];
+		const listingProps = $(el).find("p.text-nowrap").text().split(":");
+
+		const propertyType = listingProps[0].split(" ")[0] ? listingProps[0].split(" ")[0] : null;
+
+		const address = listingProps[1];
 		const city = address.split(",")[1] ? address.split(",")[1].trim() : null;
 		const region = address.split(",")[0] ? address.split(",")[0].trim() : null;
 
         results.push({
-        title,
-        price,
-        currency: "EUR",
-        listingUrl,
-		imgUrl,
-		city,
-		region,
-		// propertyType,
-		listingType: urlVar === "arrendar" ? "rent" : "buy",
-		provider: "imovirtual",
+			title,
+			price,
+			currency: "EUR",
+			listingUrl,
+			imgUrl,
+			city,
+			region,
+			propertyType,
+			listingType: urlVar === "arrendar" ? "rent" : "buy",
+			provider: "imovirtual",
         });
     });
 

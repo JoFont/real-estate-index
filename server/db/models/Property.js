@@ -10,9 +10,9 @@ const schema = new mongoose.Schema({
 		type: String,
 		default: null
 	},
-	// propertyType: String,
+	propertyType: String,
 	listingType: String,
-	// listingUrl: String,
+	listingUrl: String,
 	provider: String
 },
 {

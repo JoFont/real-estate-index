@@ -2,7 +2,7 @@ const services = require("./services/services");
 const mongoose = require("mongoose");
 const Property = require("../../db/models/Property");
 const TempProperty = require("../../db/models/TempProperty");
-
+const switchCollections = require("../db/switchCollections");
 
 module.exports.scrape = () => {
 	//Set up default mongoose connection
@@ -16,28 +16,14 @@ module.exports.scrape = () => {
 	db.once("open", () => {
 		Promise.all([
 			services.imovirtual.fetch(postServiceResults)
-		]).then(async res => {
-			// console.log("Migrating");
-			// Property.find({}).then(data => {
-			// 	console.log(data[0]);
-			// 	TestModel.insertMany(data).then(() => {
-			// 		console.log("Done Migrating");
-			// 		db.close();
-			// 	});
-			// });
-			console.log("Migrating");
-
-			await Property.deleteMany({});
-			const newResults = await TempProperty.find({});
-			await Property.insertMany(newResults);
-			await TempProperty.deleteMany({});
-			console.log("Done Migrating");
-			db.close();
-
+		]).then(res => {
+			switchCollections("properties", "tempproperties").then(res => {
+				console.log(res);
+				db.close();
+			}).catch(err => {
+				console.error(err);
+			});
 		});
-		// services.imovirtual.fetch(postServiceResults).then(rs => {
-		// 	console.log(rs)
-		// })
 	});
 
 

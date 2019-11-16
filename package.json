@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "A Real Estate Indexing website",
     "scripts": {
-      "postinstall": "npm install --prefix server && npm install --prefix public"
+      "postinstall": "npm install --prefix server && npm install --prefix public",
+      "server": "cd server && npm start"
     },
     "author": "Diogo F. Marques",
     "license": "ISC",

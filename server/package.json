@@ -6,7 +6,7 @@
   "scripts": {
     "olx": "nodemon jobs/scraper/services/olx.js",
     "imo": "nodemon jobs/scraper/services/imovirtual.js",
-    "scraper": "nodemon jobs/scraper/index.js",
+    "scraper": "nodemon jobs/scraper/scraper.js",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },

@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const scraper = require("./jobs/scraper/index");
+const scraper = require("./jobs/scraper/scraper");
 
 const PORT = process.env.PORT || 3000;
 const server = express();
@@ -49,4 +49,4 @@ server.listen(PORT, () => {
 
 
 // Run Scraper
-scraper.scrape();
+// scraper.scrape();

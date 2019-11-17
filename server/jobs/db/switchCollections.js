@@ -13,17 +13,17 @@ switchCollections = async (coll1, coll2) => {
         
         const db = client.db(dbName);
         const [task1, task2] = await Promise.all([
-            db.renameCollection(coll1, "oldproperties"),
-            db.renameCollection(coll2, "properties")
+            db.renameCollection(coll1, `old${coll1}`),
+            db.renameCollection(coll2, coll1)
         ]);
-        await db.dropCollection("oldproperties");
+        await db.dropCollection(`old${coll1}`);
 
     } catch (err) {
         console.log(err.stack);
     }
     
     client.close();
-    return "Success, Db Migration successful";
+    return `Successful Migration of ${coll2} to ${coll1}`;
 }
 
 module.exports = switchCollections;

@@ -1,7 +1,5 @@
-const express = require("express");
+const router = require("express").Router();
 const Property = require("../db/models/Property");
-
-const router = express.Router();
 
 router.get("/properties", (req, res, next) => {
     Property.find({}).then(data => {

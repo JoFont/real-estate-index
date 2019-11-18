@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 switchCollections = async (coll1, coll2) => {
     // Connection URL
-    const url = 'mongodb://heroku_m0q245mq:j8i28nooppt0rcb9prnvg15n4r@ds039078.mlab.com:39078/heroku_m0q245mq';
+    const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/heroku_m0q245mq';
     // Database Name
     const dbName = 'heroku_m0q245mq';
     const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});

@@ -96,7 +96,7 @@ async function getPageResults(pageNum) {
 				provider: "olx"
 				// features
 			});
-		}
+		}	
 	});
 
 	browser.close();

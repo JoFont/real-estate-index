@@ -4,6 +4,7 @@ const Property = require("../../db/models/Property");
 const TempProperty = require("../../db/models/TempProperty");
 const switchCollections = require("../db/switchCollections");
 
+
 module.exports.scrape = () => {
 	//Set up default mongoose connection
 	const mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/heroku_m0q245mq';
@@ -51,18 +52,3 @@ module.exports.scrape = () => {
 	};
 }
 
-
-
-
-
-
-
-
-// Promise.all([
-// 	// services.olx.fetch(postServiceResults),
-// 	services.imovirtual.fetch(postServiceResults)
-// ]).then(results => {
-// 	console.log(results);
-// }).catch(err => {
-// 	console.error(err);
-// })

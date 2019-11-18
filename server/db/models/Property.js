@@ -19,6 +19,4 @@ const schema = new mongoose.Schema({
 	timestamps: true
 });
 
-const Model = mongoose.model('properties', schema);
-
-module.exports = Model;
+module.exports = mongoose.model('properties', schema);
